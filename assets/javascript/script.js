@@ -26,7 +26,8 @@ renderButtons();
 
 // When the user clicks a button, the page grabs 10 static, non animated gif images from the giphy API
 // Under every gif, we display the rating
-$("button").on("click", function displayGirlGroups() {
+$(document).on("click", ".girlGroup" , function displayGirlGroups() {
+  console.log("I pressed a buttons");
   
   var girlGroup = $(this).attr("data-name")
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + girlGroup + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -52,7 +53,7 @@ $("button").on("click", function displayGirlGroups() {
         gifDiv.append(girlGroupGif);
         gifDiv.append(p);
 
-        $("#girlGroups").append(gifDiv);
+        $("#girlGroups").prepend(gifDiv);
 
       }
     
@@ -61,15 +62,17 @@ $("button").on("click", function displayGirlGroups() {
 });
 
 // // When the user click one of the still GIPHY images, the gif animates. 
-$(".gif").on("click", function toggleAnimation(){
+$(document).on("click", "img", function toggleAnimation(){
+  
     var state = $(this).attr("data-state");
-    console.log(state);
+    
     
 
     if (state === "still") {
       $(this).attr("src", $(this).attr("data-animate"));
       $(this).attr("data-state", "animate");
 
+    // If the user clicks the gif again, it stops playing
     } else {
       $(this).attr("src", $(this).attr("data-still"));
       $(this).attr("data-state", "still");
@@ -77,6 +80,18 @@ $(".gif").on("click", function toggleAnimation(){
     }
 
 });
+
+$(document).on("click", "#addGirlGroup", function addNewGroups () {
+  event.preventDefault();
+  var newGroup = $("#girlGroupInput").val().trim();
+  girlBands.push(newGroup);
+  console.log(girlBands);
+  renderButtons();
+
+  
+
+})
+
 
   
 
