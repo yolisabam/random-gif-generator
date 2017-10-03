@@ -1,5 +1,5 @@
 // We create an array of famous Girl Groups
-var girlBands = ["destiny's child", "the supremes", "spice girls", "danity kane", "tlc", "en vogue", "little mix", "2ne1"]
+var girlBands = ["destiny's child", "supremes", "spice girls", "josie and the pussycats", "tlc", "en vogue", "dixie chicks", "2ne1"]
 
 // We create a for loop that appends a button for each string in the array
 function renderButtons() {
@@ -39,16 +39,18 @@ $(document).on("click", ".girlGroup" , function displayGirlGroups() {
   }).done(function(response) {
     var searchResults = response.data;
 
+    console.log(queryURL)
+
       for (i=0; i<searchResults.length; i++){
         var gifDiv = $("<div>");
         var rating = searchResults[i].rating;
         var p = $("<p>").text("This gif is rated: " + rating);
         var girlGroupGif = $("<img>");
         girlGroupGif.addClass(".gif")
-        girlGroupGif.attr("src", searchResults[i].images.original_still.url);
+        girlGroupGif.attr("src", searchResults[i].images.fixed_width_still.url);
         girlGroupGif.attr("data-state" , "still");
-        girlGroupGif.attr("data-animate", searchResults[i].images.original.url)
-        girlGroupGif.attr("data-still", searchResults[i].images.original_still.url)
+        girlGroupGif.attr("data-animate", searchResults[i].images.fixed_width.url)
+        girlGroupGif.attr("data-still", searchResults[i].images.fixed_width_still.url)
 
         gifDiv.append(girlGroupGif);
         gifDiv.append(p);
