@@ -8,6 +8,10 @@
 
 }
 
+*:focus {
+  outline: none;
+}
+
 button {
   margin-left: 5px;
 }
